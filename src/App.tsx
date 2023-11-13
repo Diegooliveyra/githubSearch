@@ -1,12 +1,22 @@
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import Home from './pages/Home';
+
 import { ThemeProvider } from 'styled-components';
-import theme from './styles/theme';
 import GlobalStyles from './styles/GlobalStyles';
+import theme from './styles/theme';
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Home />,
+    },
+  ]);
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      Hello World
+      <RouterProvider router={router} />
     </ThemeProvider>
   );
 }
