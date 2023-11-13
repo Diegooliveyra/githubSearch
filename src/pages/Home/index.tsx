@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { ReactSVG } from 'react-svg';
+
 import * as S from './styles';
+
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import { useState } from 'react';
 
 const Home = () => {
   const [user, setUser] = useState<string>('');
