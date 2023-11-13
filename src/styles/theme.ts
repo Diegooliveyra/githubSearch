@@ -31,6 +31,7 @@ export default {
       secondary: '#201F1F',
     },
     gray: '#B2B2B2',
+    white: '#ede9f0',
   },
 
   spacings: {
