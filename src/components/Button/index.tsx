@@ -6,6 +6,7 @@ export type ButtonProps = React.ComponentProps<'button'> & {
   disabled?: boolean;
   iconRight?: string;
   iconLeft?: string;
+  onclick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button = ({
@@ -13,13 +14,14 @@ const Button = ({
   iconRight,
   iconLeft,
   disabled = false,
+  onclick,
 }: ButtonProps) => {
   return (
-    <S.Wrapper disabled={disabled}>
-      <S.Button>
-        {iconLeft ? <ReactSVG src={iconLeft} /> : null}
+    <S.Wrapper>
+      <S.Button disabled={disabled} onClick={onclick}>
+        {iconLeft ? <ReactSVG src={iconLeft} role="img" /> : null}
         {children}
-        {iconRight ? <ReactSVG src={iconRight} /> : null}
+        {iconRight ? <ReactSVG src={iconRight} role="img" /> : null}
       </S.Button>
     </S.Wrapper>
   );

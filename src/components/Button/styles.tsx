@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
-type WrapperProps = {
+type ButtonProps = {
   disabled: boolean;
 };
 
-export const Wrapper = styled.div<WrapperProps>`
+export const Wrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     flex-direction: column;
@@ -12,8 +12,8 @@ export const Wrapper = styled.div<WrapperProps>`
   `}
 `;
 
-export const Button = styled.button`
-  ${({ theme }) => css`
+export const Button = styled.button<ButtonProps>`
+  ${({ theme, disabled }) => css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +28,7 @@ export const Button = styled.button`
     font-size: ${theme.font.sizes.body};
     line-height: ${theme.spacings.medium};
     font-weight: ${theme.font.normal};
-    cursor: pointer;
+    cursor: ${disabled ? 'not-allowed' : 'pointer'};
     transition: all 0.3s ease-in-out;
 
     &:hover {
