@@ -5,6 +5,14 @@
 
 /** @type {import('jest').Config} */
 const config = {
+  testEnvironment: 'jest-environment-jsdom',
+  // setupFilesAfterEnv: ['<rootDir>/.jest/setup-tests.ts'],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    // '\\.(svg)$': '<rootDir>/__mocks__/fileMock.js',
+    // '\\.(gif|ttf|eot|svg|png)$': '<rootDir>/.jest/mocks/fileMock.js',
+    // '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+  },
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
@@ -89,9 +97,9 @@ const config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
+  // moduleNameMapper: {
+
+  // },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -147,7 +155,7 @@ const config = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'jsdom',
+  // testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
@@ -201,6 +209,8 @@ const config = {
         },
       },
     ],
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/.jest/fileTransformer.ts',
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
