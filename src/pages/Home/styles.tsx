@@ -34,7 +34,7 @@ export const Form = styled.form`
   `}
 `;
 
-export const WrapperButton = styled.form`
+export const WrapperButton = styled.div`
   ${() => css`
     height: 60px;
 
