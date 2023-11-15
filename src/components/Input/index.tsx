@@ -2,9 +2,8 @@ import * as S from './styles';
 
 export type InputProps = React.ComponentProps<'input'> & {
   disabled?: boolean;
-  value: string;
   label?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const Input = ({
@@ -18,13 +17,14 @@ const Input = ({
 }: InputProps) => {
   return (
     <S.Wrapper>
-      {label && <label htmlFor={name}>{label}</label>}
+      {!!label && <label htmlFor={name}>{label}</label>}
       <S.InputField
         type={type}
         value={value}
         name={name}
         placeholder={placeholder}
         onChange={onChange}
+        {...(label ? { id: name } : {})}
         {...rest}
       />
     </S.Wrapper>
