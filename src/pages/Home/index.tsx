@@ -3,7 +3,7 @@ import { ReactSVG } from 'react-svg';
 
 import * as S from './styles';
 
-import Logo from '@assets/imgs/logo-y.svg';
+import Logo from '../../assets/imgs/logo-y.svg';
 
 import Input from '@/components/Input';
 import Button from '@/components/Button';
@@ -19,7 +19,7 @@ const Home = () => {
   };
   return (
     <S.Container>
-      <ReactSVG src={Logo} />
+      <ReactSVG src={Logo} role="figure" />
       <S.Form onSubmit={handleSubmit}>
         <Input
           value={user}

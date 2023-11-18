@@ -25,5 +25,9 @@ export const IconButton = styled.button`
     background-color: transparent;
     border: none;
     cursor: pointer;
+
+    svg {
+      transform: scale(0.8);
+    }
   `}
 `;
