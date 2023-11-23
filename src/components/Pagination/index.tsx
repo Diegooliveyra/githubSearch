@@ -9,20 +9,22 @@ import * as S from './styles';
 export type PaginationProps = {
   totalRegister: number;
   totalPage: number;
-  actualPage: number;
+  paginaAtual: number;
+  setPaginaAtual: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const Pagination = ({
   totalRegister,
-  actualPage,
+  paginaAtual,
+  setPaginaAtual,
   totalPage,
 }: PaginationProps) => {
-  const [paginaAtual, setPaginaAtual] = useState<number>(actualPage);
   const [lastPage, setLastPage] = useState<number>();
 
   useEffect(() => {
-    setLastPage(Math.round(totalRegister / totalPage) + 1);
-  }, [actualPage, totalPage, totalRegister]);
+    const total = totalRegister / totalPage;
+    setLastPage(Number.isInteger(total) ? total : Math.round(total) + 1);
+  }, [totalPage, totalRegister]);
 
   const handleNext = () => {
     if (lastPage === paginaAtual) return;
@@ -36,12 +38,12 @@ const Pagination = ({
   return (
     <S.Wrapper>
       <S.ActionButton onClick={handlePreview} disabled={paginaAtual === 1}>
-        <ReactSVG src={LeftArrow} />
+        <ReactSVG src={LeftArrow} data-testid="arrow-left" />
         Preview
       </S.ActionButton>
       <S.ActionButton onClick={handleNext} disabled={lastPage === paginaAtual}>
         Next
-        <ReactSVG src={RigthArrow} />
+        <ReactSVG src={RigthArrow} data-testid="arrow-rigth" />
       </S.ActionButton>
     </S.Wrapper>
   );

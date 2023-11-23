@@ -8,8 +8,10 @@ import Followers from '../../assets/icons/ic-peoples.svg';
 import Organized from '../../assets/icons/ic-sharp-home.svg';
 import Branch from '../../assets/icons/ic-git-branch-fill.svg';
 import Pagination from '@/components/Pagination';
+import { useState } from 'react';
 
 const User = () => {
+  const [page, setPage] = useState(1);
   return (
     <>
       <Header />
@@ -70,7 +72,12 @@ const User = () => {
 
         <S.WrapperList>{/* <RepositoryCard repository={} /> */}</S.WrapperList>
 
-        <Pagination actualPage={1} totalPage={6} totalRegister={50} />
+        <Pagination
+          paginaAtual={page}
+          setPaginaAtual={setPage}
+          totalPage={6}
+          totalRegister={50}
+        />
       </S.Container>
     </>
   );
