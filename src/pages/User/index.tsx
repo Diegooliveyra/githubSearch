@@ -7,7 +7,7 @@ import Following from '../../assets/icons/ic-peoples-fill.svg';
 import Followers from '../../assets/icons/ic-peoples.svg';
 import Organized from '../../assets/icons/ic-sharp-home.svg';
 import Branch from '../../assets/icons/ic-git-branch-fill.svg';
-import RepositoryCard from '@/components/RepositoryCard';
+import Pagination from '@/components/Pagination';
 
 const User = () => {
   return (
@@ -69,6 +69,8 @@ const User = () => {
         <S.Title>Meus Repositorios </S.Title>
 
         <S.WrapperList>{/* <RepositoryCard repository={} /> */}</S.WrapperList>
+
+        <Pagination actualPage={1} totalPage={6} totalRegister={50} />
       </S.Container>
     </>
   );
