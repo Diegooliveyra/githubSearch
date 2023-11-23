@@ -7,6 +7,7 @@ import Following from '../../assets/icons/ic-peoples-fill.svg';
 import Followers from '../../assets/icons/ic-peoples.svg';
 import Organized from '../../assets/icons/ic-sharp-home.svg';
 import Branch from '../../assets/icons/ic-git-branch-fill.svg';
+import RepositoryCard from '@/components/RepositoryCard';
 
 const User = () => {
   return (
@@ -64,6 +65,10 @@ const User = () => {
             </S.BranchWrapper>
           </S.Wrapper>
         </S.UserInfo>
+
+        <S.Title>Meus Repositorios </S.Title>
+
+        <S.WrapperList>{/* <RepositoryCard repository={} /> */}</S.WrapperList>
       </S.Container>
     </>
   );

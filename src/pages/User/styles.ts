@@ -16,7 +16,7 @@ export const Container = styled.main`
   ${({ theme }) => css`
     max-width: 140rem;
     margin: 0 auto;
-    padding-top: ${theme.spacings.large};
+    padding: ${theme.spacings.large} ${theme.spacings.small};
     animation: ${toRight} 0.3s ease-in;
   `}
 `;
@@ -41,6 +41,15 @@ export const Header = styled.main`
   `}
 `;
 
+export const Title = styled.h1`
+  ${({ theme }) => css`
+    font-size: ${theme.font.sizes.h1};
+    line-height: ${theme.spacings.small};
+    margin-top: ${theme.spacings.xxlarge};
+    color: ${theme.colors.purple};
+  `}
+`;
+
 export const UserInfo = styled.div`
   ${({ theme }) => css`
     display: grid;
@@ -53,8 +62,8 @@ export const UserInfo = styled.div`
 
 export const Avatar = styled.img`
   ${({ theme }) => css`
-    width: 160px;
-    height: 160px;
+    width: 170px;
+    height: 170px;
     border-radius: 50%;
     border: 2px solid ${theme.colors.purple};
     background-color: ${theme.colors.black.secondary};
@@ -66,7 +75,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: ${theme.spacings.xsmall};
+    padding: ${theme.spacings.small};
     background-color: ${theme.colors.black.secondary};
     border-radius: ${theme.border.radius};
   `}
@@ -103,5 +112,14 @@ export const BranchWrapper = styled.div`
     svg {
       transform: scale(1.3);
     }
+  `}
+`;
+
+export const WrapperList = styled.div`
+  ${({ theme }) => css`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: ${theme.spacings.small};
+    margin: ${theme.spacings.small} 0;
   `}
 `;
