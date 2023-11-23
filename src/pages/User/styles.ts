@@ -123,3 +123,11 @@ export const WrapperList = styled.div`
     margin: ${theme.spacings.small} 0;
   `}
 `;
+
+export const WrapperPagination = styled.div`
+  ${() => css`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  `}
+`;

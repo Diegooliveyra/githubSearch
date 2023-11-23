@@ -72,12 +72,14 @@ const User = () => {
 
         <S.WrapperList>{/* <RepositoryCard repository={} /> */}</S.WrapperList>
 
-        <Pagination
-          paginaAtual={page}
-          setPaginaAtual={setPage}
-          totalPage={6}
-          totalRegister={50}
-        />
+        <S.WrapperPagination>
+          <Pagination
+            paginaAtual={page}
+            setPaginaAtual={setPage}
+            totalPage={6}
+            totalRegister={50}
+          />
+        </S.WrapperPagination>
       </S.Container>
     </>
   );
