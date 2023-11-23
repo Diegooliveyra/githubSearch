@@ -5,10 +5,10 @@ import Branch from '../../assets/icons/ic-git-branch.svg';
 import CodeFile from '../../assets/icons/ic-code-file.svg';
 
 import * as S from './styles';
-import { Repository } from '@/@types/repositories';
+import { IRepositoryDTO } from '@/@types/repositories';
 
 export type RepositoryCardProps = {
-  repository: Repository;
+  repository: IRepositoryDTO;
   onClick?: () => void;
 };
 
