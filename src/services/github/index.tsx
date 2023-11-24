@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosResponse } from 'axios';
-import { axiosApi } from '../api/axios';
+
 import { IRepositoryDTO } from '@/@types/repositories';
 import { IUserDTO } from '@/@types/user';
+import { axiosApi } from '../api/axios';
 
 const baseUrl = '/users';
 
