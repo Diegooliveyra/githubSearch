@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import { GitHubService } from './index';
 import { axiosApi } from '../api/axios';
 
