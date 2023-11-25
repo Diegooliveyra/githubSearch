@@ -1,56 +1,77 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect, useState } from 'react';
+
+import { useParams } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
-import * as S from './styles';
-import Header from '@/components/Header';
-import Star from '../../assets/icons/ic-star.svg';
-import Location from '../../assets/icons/ic-location.svg';
-import Following from '../../assets/icons/ic-peoples-fill.svg';
-import Followers from '../../assets/icons/ic-peoples.svg';
-import Organized from '../../assets/icons/ic-sharp-home.svg';
-import Branch from '../../assets/icons/ic-git-branch-fill.svg';
+
+import RepositoryCard from '@/components/RepositoryCard';
 import Pagination from '@/components/Pagination';
-import { useState } from 'react';
+import Header from '@/components/Header';
+
+import Following from '../../assets/icons/ic-peoples-fill.svg';
+import Branch from '../../assets/icons/ic-git-branch-fill.svg';
+import Organized from '../../assets/icons/ic-sharp-home.svg';
+import Location from '../../assets/icons/ic-location.svg';
+import Followers from '../../assets/icons/ic-peoples.svg';
+
+import { GithubContext } from '@/context/user';
+
+import * as S from './styles';
 
 const User = () => {
-  const [page, setPage] = useState(1);
+  const parametros = useParams();
+  const [page, setPage] = useState<number>(1);
+  const { user, repositories, getRepositories, getUsers } =
+    useContext(GithubContext);
+
+  useEffect(() => {
+    if (!user.login) {
+      getRepositories({
+        username: String(parametros.username),
+        page,
+        per_page: 6,
+      });
+      getUsers(String(parametros.username));
+    }
+  }, [parametros]);
+
+  useEffect(() => {
+    if (user.login)
+      getRepositories({ username: user.login, page, per_page: 6 });
+  }, [page]);
+
   return (
     <>
       <Header />
       <S.Container>
         <S.UserInfo>
-          <S.Avatar
-            src="https://avatars.githubusercontent.com/u/54894831?v=4"
-            alt=""
-          />
+          <S.Avatar src={user.avatar_url} alt={user.name} />
 
           <S.Wrapper>
             <S.Header>
-              <h1>Rafaela Drumont</h1>
-              <p>@rafa_drumont</p>
+              <h1>{user.name}</h1>
+              <p>@{user.login}</p>
             </S.Header>
             <div>
               <S.IconsWrapper>
                 <S.IconsContent>
                   <ReactSVG src={Location} />
-                  <p>São Paulo - SP</p>
+                  <p>{user.location || '--'}</p>
                 </S.IconsContent>
                 <S.IconsContent>
                   <ReactSVG src={Organized} />
-                  <p>Goggle</p>
+                  <p>{user.company || '--'}</p>
                 </S.IconsContent>
               </S.IconsWrapper>
 
               <S.IconsWrapper>
                 <S.IconsContent>
                   <ReactSVG src={Following} />
-                  <p>125</p>
+                  <p>{user.following}</p>
                 </S.IconsContent>
                 <S.IconsContent>
                   <ReactSVG src={Followers} />
-                  <p>85</p>
-                </S.IconsContent>
-                <S.IconsContent>
-                  <ReactSVG src={Star} />
-                  <p>48</p>
+                  <p>{user.followers}</p>
                 </S.IconsContent>
               </S.IconsWrapper>
             </div>
@@ -62,7 +83,7 @@ const User = () => {
 
               <S.IconsContent style={{ justifyContent: 'center' }}>
                 <ReactSVG src={Branch} />
-                <h2>50</h2>
+                <h2>{user.public_repos}</h2>
               </S.IconsContent>
             </S.BranchWrapper>
           </S.Wrapper>
@@ -70,16 +91,25 @@ const User = () => {
 
         <S.Title>Meus Repositorios </S.Title>
 
-        <S.WrapperList>{/* <RepositoryCard repository={} /> */}</S.WrapperList>
-
-        <S.WrapperPagination>
-          <Pagination
-            paginaAtual={page}
-            setPaginaAtual={setPage}
-            totalPage={6}
-            totalRegister={50}
-          />
-        </S.WrapperPagination>
+        {repositories?.length ? (
+          <>
+            <S.WrapperList>
+              {repositories?.map((repo) => (
+                <RepositoryCard key={repo.id} repository={repo} />
+              ))}
+            </S.WrapperList>
+            <S.WrapperPagination>
+              <Pagination
+                paginaAtual={page}
+                setPaginaAtual={setPage}
+                totalPage={6}
+                totalRegister={user.public_repos}
+              />
+            </S.WrapperPagination>
+          </>
+        ) : (
+          <S.NotFound>{<p>Nenhum repositorio encontrado 😱</p>}</S.NotFound>
+        )}
       </S.Container>
     </>
   );

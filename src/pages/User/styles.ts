@@ -131,3 +131,17 @@ export const WrapperPagination = styled.div`
     width: 100%;
   `}
 `;
+
+export const NotFound = styled.div`
+  ${({ theme }) => css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40vh;
+
+    p {
+      font-size: ${theme.font.sizes.body};
+    }
+  `}
+`;
