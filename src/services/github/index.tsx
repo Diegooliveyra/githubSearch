@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosResponse } from 'axios';
 
 import { IRepositoryDTO } from '@/@types/repositories';
@@ -7,7 +6,7 @@ import { axiosApi } from '../api/axios';
 
 const baseUrl = '/users';
 
-type GetRepositoriesProps = {
+export type GetRepositoriesProps = {
   username: string;
   per_page?: number;
   page?: number;
@@ -15,14 +14,14 @@ type GetRepositoriesProps = {
 
 export class GitHubService {
   static async getUser(username: string): Promise<AxiosResponse<IUserDTO>> {
-    return axiosApi.get(`${baseUrl}/users/${username}`);
+    return axiosApi.get(`${baseUrl}/${username}`);
   }
 
   static async getRepositories(
     props: GetRepositoriesProps
   ): Promise<AxiosResponse<IRepositoryDTO[]>> {
     return axiosApi.get(
-      `${baseUrl}/users/${props.username}?per_page=${props.page}&page=${props.per_page}`
+      `${baseUrl}/${props.username}/repos?per_page=${props.per_page}&page=${props.page}`
     );
   }
 }
