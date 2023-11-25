@@ -43,3 +43,13 @@ export const WrapperButton = styled.div`
     }
   `}
 `;
+
+export const ErrorMessage = styled.p`
+  ${({ theme }) => css`
+    text-align: center;
+    font-size: ${theme.font.sizes.button};
+    line-height: ${theme.spacings.small};
+    animation: ${toRight} 0.3s ease-in;
+    margin-top: -30px;
+  `}
+`;

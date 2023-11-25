@@ -1,6 +1,7 @@
 import { IRepositoryDTO } from '@/@types/repositories';
 import { IUserDTO } from '@/@types/user';
 import { GetRepositoriesProps, GitHubService } from '@/services/github';
+import { AxiosError } from 'axios';
 import { ReactNode, createContext, useState } from 'react';
 
 export interface IGithubContext {
@@ -8,7 +9,6 @@ export interface IGithubContext {
   repositories: IRepositoryDTO[];
   getUsers: (username: string) => Promise<void>;
   getRepositories: (props: GetRepositoriesProps) => Promise<void>;
-  hasError: boolean;
   loading: boolean;
 }
 
@@ -19,7 +19,7 @@ export const GithubContext = createContext<IGithubContext>(
 export const GithubProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<IUserDTO>({} as IUserDTO);
   const [repositories, setRepositories] = useState<IRepositoryDTO[]>([]);
-  const [hasError, setHasError] = useState<boolean>(false);
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const getUsers = async (username: string) => {
@@ -28,8 +28,12 @@ export const GithubProvider = ({ children }: { children: ReactNode }) => {
       const response = await GitHubService.getUser(username);
       setUser(response.data);
     } catch (error) {
-      setHasError(true);
-      throw new Error();
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 404) {
+          throw new Error('Usuario não encontrado');
+        }
+        throw new Error(error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -41,7 +45,9 @@ export const GithubProvider = ({ children }: { children: ReactNode }) => {
       const response = await GitHubService.getRepositories(props);
       setRepositories(response.data);
     } catch (error) {
-      setHasError(true);
+      if (error instanceof AxiosError) {
+        throw new Error(error.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -54,7 +60,7 @@ export const GithubProvider = ({ children }: { children: ReactNode }) => {
         repositories,
         getUsers,
         getRepositories,
-        hasError,
+
         loading,
       }}
     >
