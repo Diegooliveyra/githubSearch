@@ -30,7 +30,7 @@ const RepositoryCard = ({ repository, onClick }: RepositoryCardProps) => {
         </S.IconsContent>
       </S.IconsWrapper>
       <S.CardInfo>
-        <h1>{repository.name}</h1>
+        <h2>{repository.name}</h2>
         <p>{repository.description} </p>
       </S.CardInfo>
 

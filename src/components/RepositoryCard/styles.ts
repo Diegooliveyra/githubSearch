@@ -1,4 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
+
+const toRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+
+  }
+  `;
 
 export const Card = styled.div`
   ${({ theme }) => css`
@@ -10,7 +22,7 @@ export const Card = styled.div`
     background-color: ${theme.colors.black.secondary};
     border-radius: ${theme.border.radius};
     border: 1px solid ${theme.colors.black.secondary};
-
+    animation: ${toRight} 0.5s ease;
     transition: all 0.3s ease-in-out;
 
     &:hover {
@@ -47,8 +59,8 @@ export const CardInfo = styled.div`
 
     margin: ${theme.spacings.xxsmall} 0;
 
-    h1 {
-      font-size: ${theme.font.sizes.h1};
+    h2 {
+      font-size: ${theme.font.sizes.h2};
     }
 
     p {

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { Repository } from '@/@types/repositories';
+import { IRepositoryDTO } from '@/@types/repositories';
 import { renderWithTheme } from '@/utils/tests/helpers';
 import RepositoryCard from '.';
 import { fireEvent } from '@testing-library/react';
@@ -7,7 +7,7 @@ import theme from '@/styles/theme';
 
 describe('<RepositoryCard>', () => {
   it('should render the repository card', () => {
-    const cardProps: Repository = {
+    const cardProps = {
       forks_count: 10,
       stargazers_count: 20,
       language: 'JavaScript',
@@ -18,7 +18,7 @@ describe('<RepositoryCard>', () => {
     };
 
     const { getByText } = renderWithTheme(
-      <RepositoryCard repository={cardProps} />
+      <RepositoryCard repository={cardProps as IRepositoryDTO} />
     );
 
     expect(getByText('Meu Projeto')).toBeInTheDocument();
@@ -34,7 +34,7 @@ describe('<RepositoryCard>', () => {
   });
 
   it('should render the card without anchor element for "Projeto"', () => {
-    const cardProps: Repository = {
+    const cardProps = {
       forks_count: 10,
       stargazers_count: 20,
       language: 'JavaScript',
@@ -44,14 +44,14 @@ describe('<RepositoryCard>', () => {
     };
 
     const { queryByText } = renderWithTheme(
-      <RepositoryCard repository={cardProps} />
+      <RepositoryCard repository={cardProps as IRepositoryDTO} />
     );
 
     expect(queryByText('Projeto')).not.toBeInTheDocument();
   });
 
   it('calls the click function when the card is clicked', () => {
-    const cardProps: Repository = {
+    const cardProps = {
       forks_count: 10,
       stargazers_count: 20,
       language: 'JavaScript',
@@ -64,7 +64,10 @@ describe('<RepositoryCard>', () => {
     const handleClick = jest.fn();
 
     const { getByTestId } = renderWithTheme(
-      <RepositoryCard repository={cardProps} onClick={handleClick} />
+      <RepositoryCard
+        repository={cardProps as IRepositoryDTO}
+        onClick={handleClick}
+      />
     );
 
     const cardComponent = getByTestId('card-component');
@@ -73,7 +76,7 @@ describe('<RepositoryCard>', () => {
   });
 
   it('should change the border color when hovering over the card', () => {
-    const cardProps: Repository = {
+    const cardProps = {
       forks_count: 10,
       stargazers_count: 20,
       language: 'JavaScript',
@@ -84,7 +87,7 @@ describe('<RepositoryCard>', () => {
     };
 
     const { getByTestId } = renderWithTheme(
-      <RepositoryCard repository={cardProps} />
+      <RepositoryCard repository={cardProps as IRepositoryDTO} />
     );
 
     const cardComponent = getByTestId('card-component');
