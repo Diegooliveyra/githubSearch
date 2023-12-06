@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
-import { useParams } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
 
 import RepositoryCard from '@/components/RepositoryCard';
@@ -17,28 +16,11 @@ import Followers from '../../assets/icons/ic-peoples.svg';
 import { GithubContext } from '@/context/user';
 
 import * as S from './styles';
+import { useUser } from './hooks/useUser';
 
 const User = () => {
-  const parametros = useParams();
-  const [page, setPage] = useState<number>(1);
-  const { user, repositories, getRepositories, getUsers } =
-    useContext(GithubContext);
-
-  useEffect(() => {
-    if (!user.login) {
-      getRepositories({
-        username: String(parametros.username),
-        page,
-        per_page: 6,
-      });
-      getUsers(String(parametros.username));
-    }
-  }, [parametros]);
-
-  useEffect(() => {
-    if (user.login)
-      getRepositories({ username: user.login, page, per_page: 6 });
-  }, [page]);
+  const { repositories, user } = useContext(GithubContext);
+  const { page, setPage } = useUser();
 
   return (
     <>

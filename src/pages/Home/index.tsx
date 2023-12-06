@@ -24,7 +24,7 @@ const Home = () => {
       await getRepositories({ username, page: 1, per_page: 6 });
       navigate(`/user/${username}`);
     } catch (error) {
-      if (error instanceof Error) setError(String(error.message));
+      if (error instanceof Error) setError(error.message);
     }
   };
   return (
