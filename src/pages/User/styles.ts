@@ -57,6 +57,12 @@ export const UserInfo = styled.div`
     gap: ${theme.spacings.xsmall};
     max-width: 90rem;
     margin: 0 auto;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   `}
 `;
 
@@ -121,6 +127,12 @@ export const WrapperList = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     gap: ${theme.spacings.small};
     margin: ${theme.spacings.small} 0;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   `}
 `;
 

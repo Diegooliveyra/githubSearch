@@ -16,7 +16,8 @@ export const Card = styled.div`
   ${({ theme }) => css`
     display: grid;
     grid-template-rows: 1fr 3fr 1fr;
-
+    max-width: 400px;
+    min-width: 340px;
     height: 220px;
     padding: ${theme.spacings.small};
     background-color: ${theme.colors.black.secondary};
